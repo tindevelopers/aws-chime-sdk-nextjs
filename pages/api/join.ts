@@ -36,6 +36,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         MeetingFeatures: ns_es === 'true' ? { Audio: { EchoReduction: 'AVAILABLE' } } : undefined,
       });
 
+      if (!Meeting) {
+        return res.status(500).json({ error: 'Failed to create meeting' });
+      }
+
       meetingCache[title] = Meeting;
       attendeeCache[title] = {};
     }
