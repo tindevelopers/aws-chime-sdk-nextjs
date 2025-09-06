@@ -4,22 +4,11 @@
 // Simple in-memory cache for demo purposes
 // In production, you'd want to use Redis, DynamoDB, or another persistent store
 
-interface Meeting {
-  MeetingId: string;
-  ExternalMeetingId: string;
-  MediaRegion: string;
-  MediaPlacement: any;
-  MeetingArn: string;
-  TenantIds: string[];
-}
+import { Meeting as AWSMeeting, Attendee as AWSAttendee } from '@aws-sdk/client-chime-sdk-meetings';
 
-interface Attendee {
-  AttendeeId: string;
-  ExternalUserId: string;
-  Name: string;
-  Capabilities?: any;
-  JoinToken?: string;
-}
+// Use AWS SDK types directly
+type Meeting = AWSMeeting;
+type Attendee = AWSAttendee & { Name?: string; };
 
 // Global cache objects
 declare global {

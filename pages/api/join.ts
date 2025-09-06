@@ -45,10 +45,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     // Create attendee
+    const meetingId = meetingCache[title].MeetingId;
+    if (!meetingId) {
+      return res.status(500).json({ error: 'Invalid meeting: MeetingId not found' });
+    }
+
     const { Attendee } = await chimeSDKMeetings.createAttendee({
-      MeetingId: meetingCache[title].MeetingId,
+      MeetingId: meetingId,
       ExternalUserId: uuidv4(),
     });
+
+    if (!Attendee || !Attendee.AttendeeId) {
+      return res.status(500).json({ error: 'Invalid attendee: AttendeeId not found' });
+    }
 
     attendeeCache[title][Attendee.AttendeeId] = { ...Attendee, Name: attendeeName };
 

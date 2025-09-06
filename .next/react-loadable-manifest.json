@@ -1,20 +1,20 @@
 {
   "pages/devices.tsx -> ../src/components/AudioPreview": {
-    "id": "pages/devices.tsx -> ../src/components/AudioPreview",
+    "id": 6886,
     "files": [
-      "static/chunks/src_components_AudioPreview_tsx.js"
+      "static/chunks/886.b7b9643aa6def006.js"
     ]
   },
   "pages/devices.tsx -> ../src/components/CameraPreview": {
-    "id": "pages/devices.tsx -> ../src/components/CameraPreview",
+    "id": 2976,
     "files": [
-      "static/chunks/src_components_CameraPreview_tsx.js"
+      "static/chunks/976.7c12a526cd4058ed.js"
     ]
   },
   "pages/devices.tsx -> ../src/components/MediaDiagnostics": {
-    "id": "pages/devices.tsx -> ../src/components/MediaDiagnostics",
+    "id": 6625,
     "files": [
-      "static/chunks/src_components_MediaDiagnostics_tsx.js"
+      "static/chunks/625.d83d876fc7e86354.js"
     ]
   }
 }

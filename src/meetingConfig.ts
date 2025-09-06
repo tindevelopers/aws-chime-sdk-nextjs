@@ -13,7 +13,7 @@ function getLogLevel(): any {
   
   const urlParams = new URLSearchParams(window.location.search);
   const queryLogLevel = urlParams.get('logLevel') || 'info';
-  return SDK_LOG_LEVELS[queryLogLevel] || SDK_LOG_LEVELS.info;
+  return SDK_LOG_LEVELS[queryLogLevel as keyof typeof SDK_LOG_LEVELS] || SDK_LOG_LEVELS.info;
 }
 
 function createLogger(): ConsoleLogger | MultiLogger {

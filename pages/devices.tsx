@@ -176,7 +176,7 @@ export default function DevicesPage() {
               typeof navigator !== 'undefined' && navigator.mediaDevices ? '✅ Supported' : '❌ Not Supported'
             }</div>
             <div><strong>getUserMedia:</strong> {
-              typeof navigator !== 'undefined' && navigator.mediaDevices?.getUserMedia ? '✅ Available' : '❌ Not Available'
+              typeof navigator !== 'undefined' && navigator.mediaDevices && typeof navigator.mediaDevices.getUserMedia === 'function' ? '✅ Available' : '❌ Not Available'
             }</div>
           </div>
         </div>
