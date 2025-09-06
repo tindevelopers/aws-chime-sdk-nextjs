@@ -109,6 +109,10 @@ export default function CameraPreview({
   useEffect(() => {
     if (isClient) {
       getMediaDevices();
+      // Auto-start camera when component loads
+      setTimeout(() => {
+        startCamera();
+      }, 500); // Small delay to ensure devices are enumerated first
     }
 
     return () => {
