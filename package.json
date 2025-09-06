@@ -1,0 +1,39 @@
+{
+  "name": "chime-sdk-vercel",
+  "version": "1.0.0",
+  "description": "Amazon Chime SDK Meeting App for Vercel",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "vercel-dev": "vercel dev"
+  },
+  "dependencies": {
+    "@aws-sdk/client-chime-sdk-meetings": "^3.490.0",
+    "amazon-chime-sdk-component-library-react": "file:../amazon-chime-sdk/amazon-chime-sdk-component-library-react",
+    "amazon-chime-sdk-js": "^3.23.0",
+    "lodash.isequal": "^4.5.0",
+    "next": "^14.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.21.2",
+    "styled-components": "^6.1.15",
+    "styled-system": "^5.1.5",
+    "throttle-debounce": "^2.3.0",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/lodash.isequal": "^4.5.6",
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.2.79",
+    "@types/react-dom": "^18.2.4",
+    "@types/styled-system": "^5.1.15",
+    "@types/throttle-debounce": "^2.1.0",
+    "@types/uuid": "^9.0.0",
+    "eslint": "^8.21.0",
+    "eslint-config-next": "^14.0.0",
+    "typescript": "^5.0.0"
+  }
+}

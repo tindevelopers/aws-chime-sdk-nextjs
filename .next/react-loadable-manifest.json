@@ -1,0 +1,20 @@
+{
+  "pages/devices.tsx -> ../src/components/AudioPreview": {
+    "id": "pages/devices.tsx -> ../src/components/AudioPreview",
+    "files": [
+      "static/chunks/src_components_AudioPreview_tsx.js"
+    ]
+  },
+  "pages/devices.tsx -> ../src/components/CameraPreview": {
+    "id": "pages/devices.tsx -> ../src/components/CameraPreview",
+    "files": [
+      "static/chunks/src_components_CameraPreview_tsx.js"
+    ]
+  },
+  "pages/devices.tsx -> ../src/components/MediaDiagnostics": {
+    "id": "pages/devices.tsx -> ../src/components/MediaDiagnostics",
+    "files": [
+      "static/chunks/src_components_MediaDiagnostics_tsx.js"
+    ]
+  }
+}
