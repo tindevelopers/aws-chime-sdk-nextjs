@@ -38,6 +38,21 @@ const DeviceInitializer = dynamic(() => import('../src/components/enhanced/Devic
   loading: () => <div style={{ textAlign: 'center', padding: '20px' }}>Initializing device management...</div>
 });
 
+const StandaloneDeviceInitializer = dynamic(() => import('../src/components/enhanced/StandaloneDeviceInitializer'), {
+  ssr: false,
+  loading: () => <div style={{ textAlign: 'center', padding: '20px' }}>Initializing standalone device access...</div>
+});
+
+const StandaloneVideoPreview = dynamic(() => import('../src/components/enhanced/StandaloneVideoPreview'), {
+  ssr: false,
+  loading: () => <div style={{ textAlign: 'center', padding: '20px' }}>Loading camera preview...</div>
+});
+
+const StandaloneScreenShare = dynamic(() => import('../src/components/enhanced/StandaloneScreenShare'), {
+  ssr: false,
+  loading: () => <div style={{ textAlign: 'center', padding: '20px' }}>Loading screen share...</div>
+});
+
 // Legacy components for comparison
 const MediaDiagnostics = dynamic(() => import('../src/components/MediaDiagnostics'), {
   ssr: false,
@@ -168,18 +183,16 @@ export default function EnhancedDevicesPage() {
         }}>
           {isClient && (
             <>
-              {/* Enhanced components need DeviceInitializer */}
-              {(activeTab === 'video' || activeTab === 'audio' || activeTab === 'devices' || activeTab === 'meeting' || activeTab === 'share') && (
-                <DeviceInitializer onInitialized={handleDeviceInitialization}>
-                  {activeTab === 'video' && (
-            <div>
-              <EnhancedVideoInputControl 
-                width={500} 
-                height={375}
-                showControls={true}
-                showBackgroundBlur={true}
-                style={{ margin: '0 auto' }}
-              />
+              {/* Video tab uses standalone device access */}
+              {activeTab === 'video' && (
+                <StandaloneDeviceInitializer onInitialized={handleDeviceInitialization}>
+                  <div>
+                    <StandaloneVideoPreview 
+                      width={500} 
+                      height={375}
+                      showControls={true}
+                      style={{ margin: '0 auto' }}
+                    />
               
               <div style={{ 
                 marginTop: '30px', 
@@ -209,11 +222,23 @@ export default function EnhancedDevicesPage() {
                     </ul>
                   </div>
                 </div>
-              </div>
-            </div>
-          )}
+                    </div>
+                  </div>
+                </StandaloneDeviceInitializer>
+              )}
 
-          {activeTab === 'audio' && isClient && (
+              {/* Screen sharing uses standalone implementation */}
+              {activeTab === 'share' && (
+                <StandaloneScreenShare 
+                  showControls={true}
+                  style={{ margin: '0 auto' }}
+                />
+              )}
+
+              {/* Other tabs use Component Library with DeviceInitializer */}
+              {(activeTab === 'audio' || activeTab === 'devices' || activeTab === 'meeting') && (
+                <DeviceInitializer onInitialized={handleDeviceInitialization}>
+                  {activeTab === 'audio' && (
             <div>
               <EnhancedAudioInputControl 
                 showVoiceFocus={true}
@@ -335,45 +360,6 @@ export default function EnhancedDevicesPage() {
               </div>
             </div>
           )}
-
-          {activeTab === 'share' && isClient && (
-            <div>
-              <EnhancedContentShare 
-                showControls={true}
-                style={{ margin: '0 auto' }}
-              />
-              
-              <div style={{ 
-                marginTop: '30px', 
-                padding: '20px', 
-                backgroundColor: '#e2e3e5',
-                borderRadius: '8px',
-                border: '1px solid #ced4da'
-              }}>
-                <h4 style={{ margin: '0 0 15px 0', color: '#495057' }}>🖥️ Screen Sharing Capabilities:</h4>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '15px' }}>
-                  <div>
-                    <strong>📤 Share Options:</strong>
-                    <ul style={{ margin: '5px 0', paddingLeft: '20px', fontSize: '14px' }}>
-                      <li>Entire screen sharing</li>
-                      <li>Specific window sharing</li>
-                      <li>Browser tab sharing</li>
-                      <li>Audio sharing (when supported)</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <strong>⚡ Advanced Features:</strong>
-                    <ul style={{ margin: '5px 0', paddingLeft: '20px', fontSize: '14px' }}>
-                      <li>High-quality content transmission</li>
-                      <li>Automatic layout adjustment</li>
-                      <li>One-click start/stop</li>
-                      <li>Multiple share support</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-                  )}
                 </DeviceInitializer>
               )}
               

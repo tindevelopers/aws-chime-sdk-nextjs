@@ -63,6 +63,24 @@
       "static/chunks/368.3b32c5a92a992703.js"
     ]
   },
+  "pages/enhanced-devices.tsx -> ../src/components/enhanced/StandaloneDeviceInitializer": {
+    "id": 6264,
+    "files": [
+      "static/chunks/264.dc0bc0660931218c.js"
+    ]
+  },
+  "pages/enhanced-devices.tsx -> ../src/components/enhanced/StandaloneScreenShare": {
+    "id": 7514,
+    "files": [
+      "static/chunks/514.f871890861ede37b.js"
+    ]
+  },
+  "pages/enhanced-devices.tsx -> ../src/components/enhanced/StandaloneVideoPreview": {
+    "id": 49,
+    "files": [
+      "static/chunks/49.02c818a839170229.js"
+    ]
+  },
   "pages/enhanced-meeting.tsx -> ../src/components/enhanced/EnhancedMeetingChat": {
     "id": 8206,
     "files": [
