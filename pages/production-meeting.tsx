@@ -95,19 +95,23 @@ function ProductionMeetingContentComponent() {
 
     try {
       console.log('ProductionMeeting: Joining meeting with setup data:', setupData);
+      console.log('ProductionMeeting: Using meetingId:', setupData.meetingId, 'userName:', setupData.userName);
 
       // Create meeting session
       const response = await fetch('/api/join', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          MeetingId: setupData.meetingId,
-          Name: setupData.userName
+          title: setupData.meetingId,
+          attendeeName: setupData.userName,
+          region: 'us-east-1'
         })
       });
 
       if (!response.ok) {
-        throw new Error(`Failed to join meeting: ${response.statusText}`);
+        const errorData = await response.text();
+        console.error('ProductionMeeting: API Error Response:', errorData);
+        throw new Error(`Failed to join meeting: ${response.status} ${response.statusText} - ${errorData}`);
       }
 
       const data = await response.json();
@@ -116,21 +120,25 @@ function ProductionMeetingContentComponent() {
       console.log('ProductionMeeting: Creating meeting session configuration...');
       
       const meetingSessionConfiguration = new (await import('amazon-chime-sdk-js')).MeetingSessionConfiguration(
-        data.Meeting,
-        data.Attendee
+        data.JoinInfo.Meeting,
+        data.JoinInfo.Attendee
       );
 
       // Join the meeting using meetingManager
+      console.log('ProductionMeeting: Joining meeting session...');
       await meetingManager.join(meetingSessionConfiguration);
       
       // Start audio and video
       console.log('ProductionMeeting: Starting audio and video...');
       await meetingManager.start();
       
+      // Set meeting as joined
+      setMeetingJoined(true);
+      
       // Store meeting data for reference
       sessionStorage.setItem('chime-meeting-data', JSON.stringify({
-        Meeting: data.Meeting,
-        Attendee: data.Attendee,
+        Meeting: data.JoinInfo.Meeting,
+        Attendee: data.JoinInfo.Attendee,
         setupData
       }));
       
