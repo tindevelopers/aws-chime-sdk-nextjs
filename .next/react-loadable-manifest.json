@@ -27,6 +27,12 @@
       "static/chunks/625.d83d876fc7e86354.js"
     ]
   },
+  "pages/enhanced-devices.tsx -> ../src/components/enhanced/DeviceInitializer": {
+    "id": 6186,
+    "files": [
+      "static/chunks/186.53109fa176771d0c.js"
+    ]
+  },
   "pages/enhanced-devices.tsx -> ../src/components/enhanced/EnhancedAudioInputControl": {
     "id": 1533,
     "files": [

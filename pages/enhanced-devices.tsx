@@ -3,7 +3,8 @@ import dynamic from 'next/dynamic';
 import { 
   MeetingProvider, 
   darkTheme, 
-  lightTheme 
+  lightTheme,
+  useMeetingManager
 } from 'amazon-chime-sdk-component-library-react';
 
 // Dynamically import enhanced components to avoid SSR issues
@@ -32,6 +33,11 @@ const EnhancedContentShare = dynamic(() => import('../src/components/enhanced/En
   loading: () => <div style={{ textAlign: 'center', padding: '20px' }}>Loading content share...</div>
 });
 
+const DeviceInitializer = dynamic(() => import('../src/components/enhanced/DeviceInitializer'), {
+  ssr: false,
+  loading: () => <div style={{ textAlign: 'center', padding: '20px' }}>Initializing device management...</div>
+});
+
 // Legacy components for comparison
 const MediaDiagnostics = dynamic(() => import('../src/components/MediaDiagnostics'), {
   ssr: false,
@@ -41,6 +47,7 @@ const MediaDiagnostics = dynamic(() => import('../src/components/MediaDiagnostic
 export default function EnhancedDevicesPage() {
   const [activeTab, setActiveTab] = useState<'video' | 'audio' | 'devices' | 'meeting' | 'share' | 'diagnostics'>('video');
   const [isClient, setIsClient] = useState(false);
+  const [isDevicesInitialized, setIsDevicesInitialized] = useState(false);
   const [meetingConfig, setMeetingConfig] = useState<any>(null);
 
   useEffect(() => {
@@ -55,6 +62,11 @@ export default function EnhancedDevicesPage() {
       joinToken: 'demo-join-token'
     });
   }, []);
+
+  const handleDeviceInitialization = (success: boolean) => {
+    console.log('Device initialization result:', success);
+    setIsDevicesInitialized(success);
+  };
 
   const tabStyle = (isActive: boolean): React.CSSProperties => ({
     padding: '12px 16px',
@@ -91,13 +103,17 @@ export default function EnhancedDevicesPage() {
           <div style={{ 
             marginTop: '15px', 
             padding: '10px 20px', 
-            backgroundColor: '#d1ecf1', 
+            backgroundColor: isDevicesInitialized ? '#d4edda' : '#fff3cd', 
             borderRadius: '6px',
             display: 'inline-block',
             fontSize: '14px',
-            color: '#0c5460'
+            color: isDevicesInitialized ? '#155724' : '#856404',
+            border: `1px solid ${isDevicesInitialized ? '#c3e6cb' : '#ffeaa7'}`
           }}>
-            ✨ <strong>New:</strong> Enhanced components with built-in device management, background blur, and advanced controls
+            {isDevicesInitialized ? 
+              '✅ Device initialization complete - Enhanced components ready!' :
+              '⏳ Initializing device management system...'
+            }
           </div>
         </div>
 
@@ -150,7 +166,12 @@ export default function EnhancedDevicesPage() {
           minHeight: '500px',
           boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
         }}>
-          {activeTab === 'video' && isClient && (
+          {isClient && (
+            <>
+              {/* Enhanced components need DeviceInitializer */}
+              {(activeTab === 'video' || activeTab === 'audio' || activeTab === 'devices' || activeTab === 'meeting' || activeTab === 'share') && (
+                <DeviceInitializer onInitialized={handleDeviceInitialization}>
+                  {activeTab === 'video' && (
             <div>
               <EnhancedVideoInputControl 
                 width={500} 
@@ -352,9 +373,12 @@ export default function EnhancedDevicesPage() {
                 </div>
               </div>
             </div>
-          )}
-
-          {activeTab === 'diagnostics' && isClient && (
+                  )}
+                </DeviceInitializer>
+              )}
+              
+              {/* Diagnostics doesn't need Device Library context */}
+              {activeTab === 'diagnostics' && (
             <div>
               <MediaDiagnostics style={{ margin: '0' }} />
               
@@ -388,6 +412,8 @@ export default function EnhancedDevicesPage() {
                 </div>
               </div>
             </div>
+              )}
+            </>
           )}
         </div>
 
