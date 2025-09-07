@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
   VideoInputControl, 
   LocalVideo, 
   VideoTileGrid,
-  VideoInputBackgroundBlurControl 
+  VideoInputBackgroundBlurControl,
+  PreviewVideo,
+  useMeetingManager,
+  useVideoInputs
 } from 'amazon-chime-sdk-component-library-react';
 import { useLocalVideo } from 'amazon-chime-sdk-component-library-react';
 
@@ -23,6 +26,9 @@ export default function EnhancedVideoInputControl({
   style = {}
 }: EnhancedVideoInputControlProps) {
   const { isVideoEnabled, toggleVideo } = useLocalVideo();
+  const { devices, selectedDevice } = useVideoInputs();
+  const meetingManager = useMeetingManager();
+  const [usePreview, setUsePreview] = useState(true);
 
   const containerStyle: React.CSSProperties = {
     display: 'flex',
@@ -68,7 +74,17 @@ export default function EnhancedVideoInputControl({
       
       {/* Video Preview Area */}
       <div style={videoContainerStyle}>
-        {isVideoEnabled ? (
+        {usePreview && selectedDevice ? (
+          <div style={{ 
+            width: '100%', 
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            <PreviewVideo />
+          </div>
+        ) : isVideoEnabled ? (
           <div style={{ 
             width: '100%', 
             height: '100%',
@@ -115,14 +131,19 @@ export default function EnhancedVideoInputControl({
       {/* Status Info */}
       <div style={{
         fontSize: '12px',
-        color: isVideoEnabled ? '#28a745' : '#6c757d',
+        color: (usePreview && selectedDevice) || isVideoEnabled ? '#28a745' : '#6c757d',
         textAlign: 'center',
         padding: '8px 12px',
-        backgroundColor: isVideoEnabled ? '#d4edda' : '#e2e3e5',
+        backgroundColor: (usePreview && selectedDevice) || isVideoEnabled ? '#d4edda' : '#e2e3e5',
         borderRadius: '4px',
-        border: `1px solid ${isVideoEnabled ? '#c3e6cb' : '#ced4da'}`
+        border: `1px solid ${(usePreview && selectedDevice) || isVideoEnabled ? '#c3e6cb' : '#ced4da'}`
       }}>
-        {isVideoEnabled ? '✅ Camera is active' : '📱 Camera is ready to start'}
+        {(usePreview && selectedDevice) || isVideoEnabled ? 
+          '✅ Camera is active' : 
+          selectedDevice ? 
+            '📱 Camera is ready to start' : 
+            '⚠️ No camera selected'
+        }
       </div>
 
       {/* Instructions */}

@@ -4,7 +4,8 @@ import {
   lightTheme,
   GlobalStyles,
   NotificationProvider,
-  BackgroundBlurProvider 
+  BackgroundBlurProvider,
+  VoiceFocusProvider 
 } from 'amazon-chime-sdk-component-library-react';
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -13,7 +14,9 @@ export default function App({ Component, pageProps }: AppProps) {
       <GlobalStyles />
       <NotificationProvider>
         <BackgroundBlurProvider>
-          <Component {...pageProps} />
+          <VoiceFocusProvider>
+            <Component {...pageProps} />
+          </VoiceFocusProvider>
         </BackgroundBlurProvider>
       </NotificationProvider>
     </ThemeProvider>
