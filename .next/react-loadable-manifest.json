@@ -78,7 +78,7 @@
   "pages/enhanced-devices.tsx -> ../src/components/enhanced/StandaloneVideoPreview": {
     "id": 49,
     "files": [
-      "static/chunks/49.02c818a839170229.js"
+      "static/chunks/49.77eeaaf4b69722fb.js"
     ]
   },
   "pages/enhanced-meeting.tsx -> ../src/components/enhanced/EnhancedMeetingChat": {
@@ -109,6 +109,30 @@
     "id": 3820,
     "files": [
       "static/chunks/590.8df32f48bef5b2de.js"
+    ]
+  },
+  "pages/setup.tsx -> ../src/components/enhanced/StandaloneAudioControl": {
+    "id": 9664,
+    "files": [
+      "static/chunks/664.48eeee2c75dae247.js"
+    ]
+  },
+  "pages/setup.tsx -> ../src/components/enhanced/StandaloneDeviceInitializer": {
+    "id": 6264,
+    "files": [
+      "static/chunks/264.dc0bc0660931218c.js"
+    ]
+  },
+  "pages/setup.tsx -> ../src/components/enhanced/StandaloneScreenShare": {
+    "id": 7514,
+    "files": [
+      "static/chunks/514.f871890861ede37b.js"
+    ]
+  },
+  "pages/setup.tsx -> ../src/components/enhanced/StandaloneVideoPreview": {
+    "id": 49,
+    "files": [
+      "static/chunks/49.77eeaaf4b69722fb.js"
     ]
   }
 }

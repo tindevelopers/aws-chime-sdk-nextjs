@@ -6,6 +6,55 @@ export default function HomePage() {
       <h1 style={{ color: '#232f3e', marginBottom: '20px' }}>🎬 Amazon Chime SDK Meeting Demo</h1>
       <p style={{ fontSize: '18px', color: '#666', marginBottom: '30px' }}>Real-time video meetings with Amazon Chime SDK on Vercel</p>
       
+      {/* Production User Flow */}
+      <div style={{
+        marginBottom: '40px',
+        padding: '25px',
+        backgroundColor: '#d4edda',
+        borderRadius: '15px',
+        border: '2px solid #28a745',
+        maxWidth: '600px',
+        margin: '0 auto 40px auto',
+        textAlign: 'center'
+      }}>
+        <h2 style={{ margin: '0 0 15px 0', color: '#155724', fontSize: '24px' }}>
+          🚀 Production Meeting Flow
+        </h2>
+        <p style={{ color: '#155724', fontSize: '16px', marginBottom: '20px' }}>
+          Complete device setup → Join production meeting
+        </p>
+        <a href="/setup" style={{
+          display: 'inline-block',
+          padding: '15px 30px',
+          backgroundColor: '#28a745',
+          color: 'white',
+          textDecoration: 'none',
+          borderRadius: '8px',
+          fontWeight: 'bold',
+          fontSize: '18px',
+          boxShadow: '0 4px 12px rgba(40, 167, 69, 0.3)',
+          transition: 'all 0.3s ease'
+        }}
+        onMouseOver={(e) => {
+          e.currentTarget.style.backgroundColor = '#218838';
+          e.currentTarget.style.transform = 'translateY(-2px)';
+          e.currentTarget.style.boxShadow = '0 6px 16px rgba(40, 167, 69, 0.4)';
+        }}
+        onMouseOut={(e) => {
+          e.currentTarget.style.backgroundColor = '#28a745';
+          e.currentTarget.style.transform = 'translateY(0)';
+          e.currentTarget.style.boxShadow = '0 4px 12px rgba(40, 167, 69, 0.3)';
+        }}>
+          ▶️ Start Complete Flow
+        </a>
+      </div>
+
+      {/* Development/Testing Options */}
+      <div style={{ marginBottom: '20px' }}>
+        <h3 style={{ color: '#666', fontSize: '18px', marginBottom: '15px' }}>
+          🛠️ Development & Testing Tools
+        </h3>
+      </div>
       {/* Enhanced Experience Options */}
       <div style={{ 
         display: 'grid', 
@@ -19,7 +68,7 @@ export default function HomePage() {
         <a href="/enhanced-meeting" style={{
           display: 'block',
           padding: '20px',
-          backgroundColor: '#28a745',
+          backgroundColor: '#17a2b8',
           color: 'white',
           textDecoration: 'none',
           borderRadius: '12px',
@@ -31,19 +80,19 @@ export default function HomePage() {
           textAlign: 'center'
         }}
         onMouseOver={(e) => {
-          e.currentTarget.style.backgroundColor = '#218838';
+          e.currentTarget.style.backgroundColor = '#138496';
           e.currentTarget.style.transform = 'translateY(-3px)';
           e.currentTarget.style.boxShadow = '0 8px 16px rgba(0, 0, 0, 0.2)';
         }}
         onMouseOut={(e) => {
-          e.currentTarget.style.backgroundColor = '#28a745';
+          e.currentTarget.style.backgroundColor = '#17a2b8';
           e.currentTarget.style.transform = 'translateY(0)';
           e.currentTarget.style.boxShadow = '0 6px 12px rgba(0, 0, 0, 0.15)';
         }}>
           <div style={{ fontSize: '32px', marginBottom: '10px' }}>🎥</div>
-          <div style={{ fontSize: '18px', marginBottom: '8px' }}>Enhanced Meeting</div>
+          <div style={{ fontSize: '18px', marginBottom: '8px' }}>Demo Meeting</div>
           <div style={{ fontSize: '14px', opacity: 0.9 }}>
-            Full meeting experience with controls, roster, and chat
+            Meeting demo with standalone components
           </div>
         </a>
         
@@ -72,9 +121,9 @@ export default function HomePage() {
           e.currentTarget.style.boxShadow = '0 6px 12px rgba(0, 0, 0, 0.15)';
         }}>
           <div style={{ fontSize: '32px', marginBottom: '10px' }}>🚀</div>
-          <div style={{ fontSize: '18px', marginBottom: '8px' }}>Enhanced Devices</div>
+          <div style={{ fontSize: '18px', marginBottom: '8px' }}>Advanced Testing</div>
           <div style={{ fontSize: '14px', opacity: 0.9 }}>
-            Professional device setup with background blur and voice focus
+            Compare Component Library vs Standalone
           </div>
         </a>
         
@@ -102,9 +151,9 @@ export default function HomePage() {
           e.currentTarget.style.boxShadow = '0 6px 12px rgba(0, 0, 0, 0.15)';
         }}>
           <div style={{ fontSize: '32px', marginBottom: '10px' }}>📱</div>
-          <div style={{ fontSize: '18px', marginBottom: '8px' }}>Basic Devices</div>
+          <div style={{ fontSize: '18px', marginBottom: '8px' }}>Basic Testing</div>
           <div style={{ fontSize: '14px', opacity: 0.9 }}>
-            Simple camera and microphone testing
+            Simple device diagnostics
           </div>
         </a>
       </div>

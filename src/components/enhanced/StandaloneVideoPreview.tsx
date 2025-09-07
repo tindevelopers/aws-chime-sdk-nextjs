@@ -5,6 +5,7 @@ interface StandaloneVideoPreviewProps {
   width?: number;
   height?: number;
   showControls?: boolean;
+  showDeviceSelection?: boolean;
   style?: React.CSSProperties;
 }
 
@@ -12,6 +13,7 @@ export default function StandaloneVideoPreview({
   width = 480,
   height = 360,
   showControls = true,
+  showDeviceSelection = true,
   style = {}
 }: StandaloneVideoPreviewProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
