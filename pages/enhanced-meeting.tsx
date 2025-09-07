@@ -36,6 +36,11 @@ const EnhancedMeetingControls = dynamic(() => import('../src/components/enhanced
   loading: () => <div style={{ textAlign: 'center', padding: '20px' }}>Loading controls...</div>
 });
 
+const StandaloneMeetingControls = dynamic(() => import('../src/components/enhanced/StandaloneMeetingControls'), {
+  ssr: false,
+  loading: () => <div style={{ textAlign: 'center', padding: '20px' }}>Loading standalone controls...</div>
+});
+
 const EnhancedMeetingRoster = dynamic(() => import('../src/components/enhanced/EnhancedMeetingRoster'), {
   ssr: false,
   loading: () => <div style={{ textAlign: 'center', padding: '20px' }}>Loading roster...</div>
@@ -202,7 +207,7 @@ export default function EnhancedMeetingPage() {
               {demoMode === 'controls' && (
                 <div style={{ textAlign: 'center' }}>
                   <h3 style={{ marginBottom: '20px', color: '#333' }}>Enhanced Meeting Controls</h3>
-                  <EnhancedMeetingControls
+                  <StandaloneMeetingControls
                     layout="undocked-horizontal"
                     showLabels={true}
                     showAdvancedControls={true}
@@ -221,16 +226,17 @@ export default function EnhancedMeetingPage() {
                     backgroundColor: '#e8f4f8',
                     borderRadius: '8px'
                   }}>
-                    <h4 style={{ margin: '0 0 10px 0', color: '#0c5460' }}>Features:</h4>
+                    <h4 style={{ margin: '0 0 10px 0', color: '#0c5460' }}>✨ Standalone Features:</h4>
                     <ul style={{ margin: '0', paddingLeft: '20px', fontSize: '14px' }}>
-                      <li>Audio/Video controls with device selection</li>
-                      <li>Voice Focus for noise suppression</li>
-                      <li>Background blur control</li>
-                      <li>Screen sharing functionality</li>
-                      <li>Participant roster toggle</li>
-                      <li>Meeting chat toggle</li>
-                      <li>Leave meeting with confirmation</li>
-                      <li>Real-time status indicators</li>
+                      <li>✅ Audio/Video controls with direct device access</li>
+                      <li>✅ Real device selection dropdowns</li>
+                      <li>✅ Functional screen sharing</li>
+                      <li>✅ Working camera and microphone toggle</li>
+                      <li>✅ Participant roster toggle</li>
+                      <li>✅ Meeting chat toggle</li>
+                      <li>✅ Leave meeting with confirmation</li>
+                      <li>✅ Real-time status indicators and animations</li>
+                      <li>✅ No meeting session required - works immediately!</li>
                     </ul>
                   </div>
                 </div>

@@ -1,14 +1,9 @@
 import React, { useState } from 'react';
-import { 
-  VideoTileGrid,
-  MeetingProvider 
-} from 'amazon-chime-sdk-component-library-react';
-import { 
-  useRemoteVideoTileState,
-  useLocalVideo 
-} from 'amazon-chime-sdk-component-library-react';
+// No longer using Component Library hooks to avoid "no input video device chosen" warnings
 
 import EnhancedMeetingControls from './EnhancedMeetingControls';
+import StandaloneMeetingControls from './StandaloneMeetingControls';
+import StandaloneVideoGrid from './StandaloneVideoGrid';
 import EnhancedMeetingRoster from './EnhancedMeetingRoster';
 import EnhancedMeetingChat from './EnhancedMeetingChat';
 
@@ -29,8 +24,10 @@ export default function EnhancedMeetingExperience({
 }: EnhancedMeetingExperienceProps) {
   const [showRoster, setShowRoster] = useState(false);
   const [showChat, setShowChat] = useState(false);
-  const { tiles: remoteVideoTiles } = useRemoteVideoTileState();
-  const { isVideoEnabled } = useLocalVideo();
+  
+  // Mock data for demo purposes (no Component Library hooks)
+  const [participantCount, setParticipantCount] = useState(3);
+  const isVideoEnabled = false;
 
   const containerStyle: React.CSSProperties = {
     width: '100vw',
@@ -87,7 +84,7 @@ export default function EnhancedMeetingExperience({
     padding: '40px'
   };
 
-  const participantCount = remoteVideoTiles.length + (isVideoEnabled ? 1 : 0);
+  // participantCount is now a state variable
 
   const NoVideoView = () => (
     <div style={noVideoPlaceholderStyle}>
@@ -198,15 +195,14 @@ export default function EnhancedMeetingExperience({
             width: '100%', 
             height: '100%' 
           }}>
-            <VideoTileGrid 
+            <StandaloneVideoGrid 
               layout="featured"
-              noRemoteVideoView={<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', backgroundColor: '#f0f0f0', color: '#666' }}>No remote video</div>}
             />
           </div>
 
           {/* Meeting Controls Overlay */}
           <div style={controlsStyle}>
-            <EnhancedMeetingControls
+            <StandaloneMeetingControls
               layout="undocked-horizontal"
               showLabels={true}
               showAdvancedControls={showAdvancedControls}

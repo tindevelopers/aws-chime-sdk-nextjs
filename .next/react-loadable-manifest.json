@@ -94,15 +94,21 @@
     ]
   },
   "pages/enhanced-meeting.tsx -> ../src/components/enhanced/EnhancedMeetingExperience": {
-    "id": 1317,
+    "id": 6477,
     "files": [
-      "static/chunks/317.fbbf09c6c08e240f.js"
+      "static/chunks/477.7261fefc21873af3.js"
     ]
   },
   "pages/enhanced-meeting.tsx -> ../src/components/enhanced/EnhancedMeetingRoster": {
     "id": 2952,
     "files": [
       "static/chunks/952.b25c25df80db4196.js"
+    ]
+  },
+  "pages/enhanced-meeting.tsx -> ../src/components/enhanced/StandaloneMeetingControls": {
+    "id": 3820,
+    "files": [
+      "static/chunks/590.8df32f48bef5b2de.js"
     ]
   }
 }
