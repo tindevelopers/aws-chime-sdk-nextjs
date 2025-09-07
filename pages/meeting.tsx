@@ -53,22 +53,88 @@ export default function MeetingPage() {
 
   if (error) {
     return (
-      <div style={{ padding: '40px', textAlign: 'center' }}>
-        <h2 style={{ color: 'red' }}>Error: {error}</h2>
-        <button
-          onClick={() => router.push('/')}
-          style={{
-            padding: '10px 20px',
-            backgroundColor: '#007bff',
-            color: 'white',
-            border: 'none',
-            borderRadius: '5px',
-            cursor: 'pointer',
-            marginTop: '20px'
-          }}
-        >
-          Back to Home
-        </button>
+      <div style={{ 
+        padding: '40px', 
+        textAlign: 'center',
+        fontFamily: 'system-ui',
+        maxWidth: '600px',
+        margin: '0 auto'
+      }}>
+        <div style={{
+          backgroundColor: '#f8d7da',
+          border: '1px solid #f5c6cb',
+          borderRadius: '8px',
+          padding: '30px',
+          marginBottom: '20px'
+        }}>
+          <h2 style={{ color: '#721c24', margin: '0 0 15px 0' }}>📋 No Meeting Session</h2>
+          <p style={{ color: '#721c24', lineHeight: '1.6', margin: '0 0 20px 0' }}>
+            {error}
+          </p>
+          
+          <div style={{ 
+            display: 'flex', 
+            gap: '10px', 
+            justifyContent: 'center',
+            flexWrap: 'wrap'
+          }}>
+            <button
+              onClick={() => router.push('/')}
+              style={{
+                padding: '12px 24px',
+                backgroundColor: '#007bff',
+                color: 'white',
+                border: 'none',
+                borderRadius: '6px',
+                cursor: 'pointer',
+                fontWeight: 'bold'
+              }}
+            >
+              🏠 Back to Home
+            </button>
+            
+            <button
+              onClick={() => router.push('/enhanced-devices')}
+              style={{
+                padding: '12px 24px',
+                backgroundColor: '#28a745',
+                color: 'white',
+                border: 'none',
+                borderRadius: '6px',
+                cursor: 'pointer',
+                fontWeight: 'bold'
+              }}
+            >
+              🔧 Test Devices First
+            </button>
+          </div>
+        </div>
+        
+        <div style={{
+          backgroundColor: '#d1ecf1',
+          border: '1px solid #bee5eb',
+          borderRadius: '8px',
+          padding: '20px',
+          textAlign: 'left'
+        }}>
+          <h4 style={{ margin: '0 0 15px 0', color: '#0c5460' }}>💡 How to Start a Meeting:</h4>
+          <ol style={{ margin: '0', paddingLeft: '20px', lineHeight: '1.6', color: '#0c5460' }}>
+            <li>Go to the <strong>Home Page</strong></li>
+            <li>Enter a <strong>Meeting Name</strong> and <strong>Your Name</strong></li>
+            <li>Click <strong>"Join Meeting"</strong> to create/join a session</li>
+            <li>You'll be redirected here with meeting data</li>
+          </ol>
+          
+          <div style={{ 
+            marginTop: '15px', 
+            padding: '10px', 
+            backgroundColor: '#b8daff', 
+            borderRadius: '4px',
+            fontSize: '14px'
+          }}>
+            <strong>Tip:</strong> Test your camera and microphone first using the <strong>Enhanced Device Setup</strong> page!
+          </div>
+        </div>
       </div>
     );
   }
