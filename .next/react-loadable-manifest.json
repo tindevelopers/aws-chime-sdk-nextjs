@@ -33,12 +33,6 @@
       "static/chunks/186.53109fa176771d0c.js"
     ]
   },
-  "pages/enhanced-devices.tsx -> ../src/components/enhanced/EnhancedAudioInputControl": {
-    "id": 1533,
-    "files": [
-      "static/chunks/533.99672b3425cc72ea.js"
-    ]
-  },
   "pages/enhanced-devices.tsx -> ../src/components/enhanced/EnhancedContentShare": {
     "id": 4156,
     "files": [
@@ -61,6 +55,12 @@
     "id": 6368,
     "files": [
       "static/chunks/368.3b32c5a92a992703.js"
+    ]
+  },
+  "pages/enhanced-devices.tsx -> ../src/components/enhanced/StandaloneAudioControl": {
+    "id": 9664,
+    "files": [
+      "static/chunks/664.48eeee2c75dae247.js"
     ]
   },
   "pages/enhanced-devices.tsx -> ../src/components/enhanced/StandaloneDeviceInitializer": {

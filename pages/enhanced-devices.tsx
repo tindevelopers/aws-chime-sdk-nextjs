@@ -13,9 +13,9 @@ const EnhancedVideoInputControl = dynamic(() => import('../src/components/enhanc
   loading: () => <div style={{ textAlign: 'center', padding: '20px' }}>Loading enhanced camera component...</div>
 });
 
-const EnhancedAudioInputControl = dynamic(() => import('../src/components/enhanced/EnhancedAudioInputControl'), {
+const StandaloneAudioControl = dynamic(() => import('../src/components/enhanced/StandaloneAudioControl'), {
   ssr: false,
-  loading: () => <div style={{ textAlign: 'center', padding: '20px' }}>Loading enhanced audio component...</div>
+  loading: () => <div style={{ textAlign: 'center', padding: '20px' }}>Loading standalone audio component...</div>
 });
 
 const EnhancedDeviceSelection = dynamic(() => import('../src/components/enhanced/EnhancedDeviceSelection'), {
@@ -235,131 +235,134 @@ export default function EnhancedDevicesPage() {
                 />
               )}
 
+              {/* Audio tab uses standalone implementation */}
+              {activeTab === 'audio' && (
+                <StandaloneDeviceInitializer onInitialized={handleDeviceInitialization}>
+                  <div>
+                    <StandaloneAudioControl 
+                      showVoiceFocus={true}
+                      showOutputControl={true}
+                      showLevelMeter={true}
+                      style={{ margin: '0 auto' }}
+                    />
+                    
+                    <div style={{ 
+                      marginTop: '30px', 
+                      padding: '20px', 
+                      backgroundColor: '#fff3cd',
+                      borderRadius: '8px',
+                      border: '1px solid #ffeaa7'
+                    }}>
+                      <h4 style={{ margin: '0 0 15px 0', color: '#856404' }}>🎵 Standalone Audio Features:</h4>
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '15px' }}>
+                        <div>
+                          <strong>🎤 Direct Device Control:</strong>
+                          <ul style={{ margin: '5px 0', paddingLeft: '20px', fontSize: '14px' }}>
+                            <li>Real microphone device selection</li>
+                            <li>Live speaker device selection</li>
+                            <li>Voice Focus simulation</li>
+                            <li>Live audio level monitoring</li>
+                          </ul>
+                        </div>
+                        <div>
+                          <strong>🔊 Browser Integration:</strong>
+                          <ul style={{ margin: '5px 0', paddingLeft: '20px', fontSize: '14px' }}>
+                            <li>Direct getUserMedia access</li>
+                            <li>Real-time audio analysis</li>
+                            <li>Device enumeration</li>
+                            <li>Immediate functionality</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </StandaloneDeviceInitializer>
+              )}
+
               {/* Other tabs use Component Library with DeviceInitializer */}
-              {(activeTab === 'audio' || activeTab === 'devices' || activeTab === 'meeting') && (
+              {(activeTab === 'devices' || activeTab === 'meeting') && (
                 <DeviceInitializer onInitialized={handleDeviceInitialization}>
-                  {activeTab === 'audio' && (
-            <div>
-              <EnhancedAudioInputControl 
-                showVoiceFocus={true}
-                showOutputControl={true}
-                showLevelMeter={true}
-                style={{ margin: '0 auto' }}
-              />
-              
-              <div style={{ 
-                marginTop: '30px', 
-                padding: '20px', 
-                backgroundColor: '#fff3cd',
-                borderRadius: '8px',
-                border: '1px solid #ffeaa7'
-              }}>
-                <h4 style={{ margin: '0 0 15px 0', color: '#856404' }}>🎵 Enhanced Audio Features:</h4>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '15px' }}>
-                  <div>
-                    <strong>🎤 Advanced Controls:</strong>
-                    <ul style={{ margin: '5px 0', paddingLeft: '20px', fontSize: '14px' }}>
-                      <li>Microphone device selection</li>
-                      <li>Speaker device selection</li>
-                      <li>Voice Focus (noise suppression)</li>
-                      <li>Real-time audio level meter</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <strong>🔊 Professional Audio:</strong>
-                    <ul style={{ margin: '5px 0', paddingLeft: '20px', fontSize: '14px' }}>
-                      <li>Echo cancellation</li>
-                      <li>Automatic gain control</li>
-                      <li>Noise suppression</li>
-                      <li>Audio quality optimization</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
+                  {activeTab === 'devices' && isClient && (
+                    <div>
+                      <EnhancedDeviceSelection 
+                        showQualitySettings={true}
+                        showBackgroundBlur={true}
+                        orientation="vertical"
+                        style={{ margin: '0 auto' }}
+                      />
+                      
+                      <div style={{ 
+                        marginTop: '30px', 
+                        padding: '20px', 
+                        backgroundColor: '#f8d7da',
+                        borderRadius: '8px',
+                        border: '1px solid #f5c6cb'
+                      }}>
+                        <h4 style={{ margin: '0 0 15px 0', color: '#721c24' }}>⚙️ Comprehensive Device Management:</h4>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '15px' }}>
+                          <div>
+                            <strong>📱 All Devices:</strong>
+                            <ul style={{ margin: '5px 0', paddingLeft: '20px', fontSize: '14px' }}>
+                              <li>Camera selection & preview</li>
+                              <li>Microphone selection & testing</li>
+                              <li>Speaker selection & testing</li>
+                              <li>Video quality settings</li>
+                            </ul>
+                          </div>
+                          <div>
+                            <strong>🎯 Smart Features:</strong>
+                            <ul style={{ margin: '5px 0', paddingLeft: '20px', fontSize: '14px' }}>
+                              <li>Automatic device detection</li>
+                              <li>Permission handling</li>
+                              <li>Background blur controls</li>
+                              <li>Performance optimization</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
 
-          {activeTab === 'devices' && isClient && (
-            <div>
-              <EnhancedDeviceSelection 
-                showQualitySettings={true}
-                showBackgroundBlur={true}
-                orientation="vertical"
-                style={{ margin: '0 auto' }}
-              />
-              
-              <div style={{ 
-                marginTop: '30px', 
-                padding: '20px', 
-                backgroundColor: '#f8d7da',
-                borderRadius: '8px',
-                border: '1px solid #f5c6cb'
-              }}>
-                <h4 style={{ margin: '0 0 15px 0', color: '#721c24' }}>⚙️ Comprehensive Device Management:</h4>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '15px' }}>
-                  <div>
-                    <strong>📱 All Devices:</strong>
-                    <ul style={{ margin: '5px 0', paddingLeft: '20px', fontSize: '14px' }}>
-                      <li>Camera selection & preview</li>
-                      <li>Microphone selection & testing</li>
-                      <li>Speaker selection & testing</li>
-                      <li>Video quality settings</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <strong>🎯 Smart Features:</strong>
-                    <ul style={{ margin: '5px 0', paddingLeft: '20px', fontSize: '14px' }}>
-                      <li>Automatic device detection</li>
-                      <li>Permission handling</li>
-                      <li>Background blur controls</li>
-                      <li>Performance optimization</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {activeTab === 'meeting' && isClient && (
-            <div>
-              <EnhancedVideoTileGrid 
-                showControls={true}
-                showLocalVideo={true}
-                layout="featured"
-                style={{ margin: '0 auto' }}
-              />
-              
-              <div style={{ 
-                marginTop: '30px', 
-                padding: '20px', 
-                backgroundColor: '#d1ecf1',
-                borderRadius: '8px',
-                border: '1px solid #bee5eb'
-              }}>
-                <h4 style={{ margin: '0 0 15px 0', color: '#0c5460' }}>👥 Multi-Participant Video Features:</h4>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '15px' }}>
-                  <div>
-                    <strong>📺 Video Grid:</strong>
-                    <ul style={{ margin: '5px 0', paddingLeft: '20px', fontSize: '14px' }}>
-                      <li>Responsive layout (featured/grid)</li>
-                      <li>Automatic tile management</li>
-                      <li>Local video preview</li>
-                      <li>Participant status indicators</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <strong>🎮 Meeting Controls:</strong>
-                    <ul style={{ margin: '5px 0', paddingLeft: '20px', fontSize: '14px' }}>
-                      <li>Integrated control bar</li>
-                      <li>Camera/microphone toggles</li>
-                      <li>Background blur control</li>
-                      <li>Screen sharing button</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
+                  {activeTab === 'meeting' && isClient && (
+                    <div>
+                      <EnhancedVideoTileGrid 
+                        showControls={true}
+                        showLocalVideo={true}
+                        layout="featured"
+                        style={{ margin: '0 auto' }}
+                      />
+                      
+                      <div style={{ 
+                        marginTop: '30px', 
+                        padding: '20px', 
+                        backgroundColor: '#d1ecf1',
+                        borderRadius: '8px',
+                        border: '1px solid #bee5eb'
+                      }}>
+                        <h4 style={{ margin: '0 0 15px 0', color: '#0c5460' }}>👥 Multi-Participant Video Features:</h4>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '15px' }}>
+                          <div>
+                            <strong>📺 Video Grid:</strong>
+                            <ul style={{ margin: '5px 0', paddingLeft: '20px', fontSize: '14px' }}>
+                              <li>Responsive layout (featured/grid)</li>
+                              <li>Automatic tile management</li>
+                              <li>Local video preview</li>
+                              <li>Participant status indicators</li>
+                            </ul>
+                          </div>
+                          <div>
+                            <strong>🎮 Meeting Controls:</strong>
+                            <ul style={{ margin: '5px 0', paddingLeft: '20px', fontSize: '14px' }}>
+                              <li>Integrated control bar</li>
+                              <li>Camera/microphone toggles</li>
+                              <li>Background blur control</li>
+                              <li>Screen sharing button</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </DeviceInitializer>
               )}
               
