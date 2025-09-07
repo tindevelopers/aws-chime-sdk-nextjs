@@ -112,17 +112,27 @@ function ProductionMeetingContentComponent() {
 
       const data = await response.json();
       
-      // Store meeting data for Component Library use
+      // Join meeting using Component Library with proper configuration
+      console.log('ProductionMeeting: Creating meeting session configuration...');
+      
+      const meetingSessionConfiguration = new (await import('amazon-chime-sdk-js')).MeetingSessionConfiguration(
+        data.Meeting,
+        data.Attendee
+      );
+
+      // Join the meeting using meetingManager
+      await meetingManager.join(meetingSessionConfiguration);
+      
+      // Start audio and video
+      console.log('ProductionMeeting: Starting audio and video...');
+      await meetingManager.start();
+      
+      // Store meeting data for reference
       sessionStorage.setItem('chime-meeting-data', JSON.stringify({
         Meeting: data.Meeting,
         Attendee: data.Attendee,
         setupData
       }));
-
-      // For this demo, we'll show successful connection
-      // In production, you would use the proper Component Library join flow
-      setMeetingJoined(true);
-      setIsJoining(false);
       
       console.log('ProductionMeeting: Successfully joined meeting');
 
@@ -145,8 +155,8 @@ function ProductionMeetingContentComponent() {
 
   const containerStyle: React.CSSProperties = {
     minHeight: '100vh',
-    backgroundColor: '#1a1a1a',
-    color: 'white',
+    backgroundColor: '#f8f9fa',
+    color: '#212529',
     fontFamily: 'system-ui'
   };
 
@@ -168,26 +178,32 @@ function ProductionMeetingContentComponent() {
   };
 
   const videoAreaStyle: React.CSSProperties = {
-    backgroundColor: '#2a2a2a',
+    backgroundColor: '#ffffff',
     borderRadius: '10px',
     overflow: 'hidden',
-    position: 'relative'
+    position: 'relative',
+    border: '1px solid #dee2e6',
+    boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
   };
 
   const sidebarStyle: React.CSSProperties = {
-    backgroundColor: '#333',
+    backgroundColor: '#ffffff',
     borderRadius: '10px',
     padding: '20px',
-    overflowY: 'auto'
+    overflowY: 'auto',
+    border: '1px solid #dee2e6',
+    boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
   };
 
   const controlBarStyle: React.CSSProperties = {
-    backgroundColor: '#232f3e',
+    backgroundColor: '#f8f9fa',
     padding: '15px 20px',
     display: 'flex',
     justifyContent: 'center',
     gap: '15px',
-    alignItems: 'center'
+    alignItems: 'center',
+    borderTop: '1px solid #dee2e6',
+    boxShadow: '0 -2px 10px rgba(0,0,0,0.1)'
   };
 
   const buttonStyle = (active: boolean = false): React.CSSProperties => ({
@@ -308,7 +324,7 @@ function ProductionMeetingContentComponent() {
                   justifyContent: 'center', 
                   height: '100%',
                   flexDirection: 'column',
-                  color: '#999'
+                  color: '#6c757d'
                 }}>
                   <div style={{ fontSize: '60px', marginBottom: '20px' }}>👤</div>
                   <div style={{ fontSize: '24px' }}>Waiting for participants...</div>
@@ -335,15 +351,22 @@ function ProductionMeetingContentComponent() {
           <div style={sidebarStyle}>
             {showRoster && (
               <div>
-                <h3 style={{ marginTop: 0 }}>👥 Participants</h3>
+                <h3 style={{ marginTop: 0, color: '#212529' }}>👥 Participants</h3>
                 <Roster />
               </div>
             )}
             {showChat && (
               <div style={{ marginTop: showRoster ? '30px' : '0' }}>
-                <h3 style={{ marginTop: 0 }}>💬 Chat</h3>
-                <div style={{ color: '#ccc', textAlign: 'center', padding: '20px' }}>
-                  💬 Chat feature would be implemented here using Component Library ChatBubble
+                <h3 style={{ marginTop: 0, color: '#212529' }}>💬 Chat</h3>
+                <div style={{ 
+                  color: '#6c757d', 
+                  textAlign: 'center', 
+                  padding: '20px',
+                  backgroundColor: '#f8f9fa',
+                  borderRadius: '6px',
+                  border: '1px solid #dee2e6'
+                }}>
+                  💬 Chat feature ready for Component Library integration
                 </div>
               </div>
             )}
@@ -353,11 +376,22 @@ function ProductionMeetingContentComponent() {
 
       {/* Control Bar */}
       <div style={controlBarStyle}>
-        <AudioInputControl />
-        <VideoInputControl />
-        <AudioOutputControl />
-        <ContentShareControl />
-        <BackgroundBlurCheckbox />
+        <div style={{ 
+          display: 'flex', 
+          gap: '15px', 
+          alignItems: 'center',
+          padding: '10px 20px',
+          backgroundColor: 'white',
+          borderRadius: '8px',
+          border: '1px solid #dee2e6',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+        }}>
+          <AudioInputControl />
+          <VideoInputControl />
+          <AudioOutputControl />
+          <ContentShareControl />
+          <BackgroundBlurCheckbox />
+        </div>
         
         {/* Status Indicators */}
         <div style={{ 
@@ -365,16 +399,43 @@ function ProductionMeetingContentComponent() {
           gap: '10px', 
           alignItems: 'center',
           marginLeft: '20px',
-          fontSize: '14px'
+          fontSize: '14px',
+          padding: '8px 16px',
+          backgroundColor: 'white',
+          borderRadius: '6px',
+          border: '1px solid #dee2e6'
         }}>
-          <span style={{ color: muted ? '#dc3545' : '#28a745' }}>
-            {muted ? '🔇' : '🎤'}
+          <span style={{ 
+            color: muted ? '#dc3545' : '#28a745',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '4px'
+          }}>
+            {muted ? '🔇' : '🎤'} 
+            <span style={{ fontSize: '12px', color: '#6c757d' }}>
+              {muted ? 'Muted' : 'Live'}
+            </span>
           </span>
-          <span style={{ color: isVideoEnabled ? '#28a745' : '#dc3545' }}>
+          <span style={{ 
+            color: isVideoEnabled ? '#28a745' : '#dc3545',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '4px'
+          }}>
             {isVideoEnabled ? '📹' : '📹🚫'}
+            <span style={{ fontSize: '12px', color: '#6c757d' }}>
+              {isVideoEnabled ? 'Video' : 'No Video'}
+            </span>
           </span>
           {isContentShareEnabled && (
-            <span style={{ color: '#007bff' }}>🖥️</span>
+            <span style={{ 
+              color: '#007bff',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '4px'
+            }}>
+              🖥️ <span style={{ fontSize: '12px', color: '#6c757d' }}>Sharing</span>
+            </span>
           )}
         </div>
       </div>

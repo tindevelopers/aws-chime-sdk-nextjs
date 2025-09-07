@@ -111,6 +111,10 @@
       "static/chunks/590.8df32f48bef5b2de.js"
     ]
   },
+  "pages/production-meeting.tsx -> amazon-chime-sdk-js": {
+    "id": 3204,
+    "files": []
+  },
   "pages/setup.tsx -> ../src/components/enhanced/StandaloneAudioControl": {
     "id": 9664,
     "files": [
