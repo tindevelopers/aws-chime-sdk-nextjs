@@ -69,13 +69,15 @@ export default function EnhancedVideoInputControl({
       {/* Video Preview Area */}
       <div style={videoContainerStyle}>
         {isVideoEnabled ? (
-          <LocalVideo 
-            style={{ 
-              width: '100%', 
-              height: '100%',
-              objectFit: 'cover'
-            }}
-          />
+          <div style={{ 
+            width: '100%', 
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            <LocalVideo />
+          </div>
         ) : (
           <div style={placeholderStyle}>
             <div style={{ fontSize: '40px', marginBottom: '10px' }}>📹</div>
@@ -99,36 +101,12 @@ export default function EnhancedVideoInputControl({
           {/* Video Input Control with device selection */}
           <VideoInputControl 
             label="Camera"
-            style={{
-              backgroundColor: isVideoEnabled ? '#28a745' : '#6c757d',
-              color: 'white',
-              border: 'none',
-              borderRadius: '6px',
-              padding: '8px 16px',
-              fontSize: '14px',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '5px'
-            }}
           />
 
           {/* Background Blur Control */}
           {showBackgroundBlur && (
             <VideoInputBackgroundBlurControl 
-              label="Background Blur"
-              style={{
-                backgroundColor: '#007bff',
-                color: 'white',
-                border: 'none',
-                borderRadius: '6px',
-                padding: '8px 16px',
-                fontSize: '14px',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '5px'
-              }}
+              backgroundBlurLabel="Background Blur"
             />
           )}
         </div>

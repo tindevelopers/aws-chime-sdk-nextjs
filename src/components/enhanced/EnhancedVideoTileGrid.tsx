@@ -2,7 +2,6 @@ import React from 'react';
 import { 
   VideoTileGrid,
   LocalVideo,
-  MeetingControls,
   ControlBar,
   VideoInputControl,
   AudioInputControl,
@@ -14,7 +13,7 @@ import { useRemoteVideoTileState, useLocalVideo } from 'amazon-chime-sdk-compone
 interface EnhancedVideoTileGridProps {
   showControls?: boolean;
   showLocalVideo?: boolean;
-  layout?: 'featured' | 'grid';
+  layout?: 'featured' | 'standard';
   style?: React.CSSProperties;
 }
 
@@ -117,11 +116,7 @@ export default function EnhancedVideoTileGrid({
       <div style={videoGridContainerStyle}>
         <VideoTileGrid 
           layout={layout}
-          noRemoteVideoView={<NoRemoteVideoView />}
-          style={{ 
-            width: '100%', 
-            height: '100%' 
-          }}
+          noRemoteVideoView={<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: '#666' }}>No remote participants</div>}
         />
       </div>
 
@@ -142,15 +137,18 @@ export default function EnhancedVideoTileGrid({
           />
           
           <AudioInputControl 
-            label="Microphone"
+            muteLabel="Mute"
+            unmuteLabel="Unmute"
           />
           
           <VideoInputBackgroundBlurControl 
-            label="Background"
+            backgroundBlurLabel="Background"
           />
           
           <ContentShareControl 
             label="Share Screen"
+            pauseLabel="Pause"
+            unpauseLabel="Resume"
           />
         </div>
       )}

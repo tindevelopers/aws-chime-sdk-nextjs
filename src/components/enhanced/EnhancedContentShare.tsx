@@ -14,7 +14,7 @@ export default function EnhancedContentShare({
   showControls = true,
   style = {}
 }: EnhancedContentShareProps) {
-  const { tiles: contentShareTiles, isContentShareActive } = useContentShareState();
+  const { tiles: contentShareTiles, isLocalUserSharing } = useContentShareState();
 
   const containerStyle: React.CSSProperties = {
     display: 'flex',
@@ -60,11 +60,11 @@ export default function EnhancedContentShare({
 
   const statusStyle: React.CSSProperties = {
     fontSize: '12px',
-    color: isContentShareActive ? '#28a745' : '#6c757d',
+    color: isLocalUserSharing ? '#28a745' : '#6c757d',
     textAlign: 'center',
     padding: '8px 12px',
-    backgroundColor: isContentShareActive ? '#d4edda' : '#e2e3e5',
-    border: `1px solid ${isContentShareActive ? '#c3e6cb' : '#ced4da'}`,
+    backgroundColor: isLocalUserSharing ? '#d4edda' : '#e2e3e5',
+    border: `1px solid ${isLocalUserSharing ? '#c3e6cb' : '#ced4da'}`,
     borderRadius: '4px'
   };
 
@@ -79,14 +79,16 @@ export default function EnhancedContentShare({
 
       {/* Content Share Area */}
       <div style={contentAreaStyle}>
-        {isContentShareActive && contentShareTiles.length > 0 ? (
-          <ContentShare 
-            style={{ 
-              width: '100%', 
-              height: '100%',
-              objectFit: 'contain'
-            }}
-          />
+        {isLocalUserSharing && contentShareTiles.length > 0 ? (
+          <div style={{ 
+            width: '100%', 
+            height: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}>
+            <ContentShare />
+          </div>
         ) : (
           <div style={placeholderStyle}>
             <div style={{ fontSize: '48px', marginBottom: '20px' }}>🖥️</div>
@@ -112,7 +114,7 @@ export default function EnhancedContentShare({
 
       {/* Status Info */}
       <div style={statusStyle}>
-        {isContentShareActive ? (
+        {isLocalUserSharing ? (
           <>📤 Screen sharing is active • {contentShareTiles.length} content share(s)</>
         ) : (
           <>📱 Screen sharing is ready • Click "Share Screen" to start</>
@@ -123,19 +125,9 @@ export default function EnhancedContentShare({
       {showControls && (
         <div style={controlsStyle}>
           <ContentShareControl 
-            label={isContentShareActive ? "Stop Sharing" : "Share Screen"}
-            style={{
-              backgroundColor: isContentShareActive ? '#dc3545' : '#007bff',
-              color: 'white',
-              border: 'none',
-              borderRadius: '6px',
-              padding: '10px 20px',
-              fontSize: '14px',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px'
-            }}
+            label="Share Screen"
+            pauseLabel="Pause"
+            unpauseLabel="Resume"
           />
         </div>
       )}

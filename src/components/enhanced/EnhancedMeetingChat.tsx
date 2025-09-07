@@ -272,8 +272,7 @@ export default function EnhancedMeetingChat({
                 >
                   <ChatBubble
                     variant={message.variant}
-                    senderName={message.senderName}
-                    showName={showName}
+                    senderName={showName ? message.senderName : undefined}
                     showTail={showTail}
                     style={{
                       maxWidth: '80%',

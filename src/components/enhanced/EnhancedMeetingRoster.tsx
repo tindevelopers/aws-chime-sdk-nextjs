@@ -79,8 +79,8 @@ export default function EnhancedMeetingRoster({
     ...style
   };
 
-  const handleSearch = (value: string) => {
-    setSearchValue(value);
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
   };
 
   const handleClose = () => {
@@ -91,7 +91,8 @@ export default function EnhancedMeetingRoster({
 
   return (
     <div style={containerStyle}>
-      <Roster style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+      <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+        <Roster>
         {/* Roster Header */}
         <RosterHeader
           title={title}
@@ -99,8 +100,6 @@ export default function EnhancedMeetingRoster({
           onClose={showCloseButton ? handleClose : undefined}
           searchValue={searchValue}
           onSearch={showSearch ? handleSearch : undefined}
-          data-tooltip="Search participants"
-          data-tooltip-position="bottom"
         />
 
         {/* Present Participants */}
@@ -206,7 +205,8 @@ export default function EnhancedMeetingRoster({
             </button>
           )}
         </div>
-      </Roster>
+        </Roster>
+      </div>
     </div>
   );
 }

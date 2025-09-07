@@ -1,7 +1,7 @@
 import React from 'react';
 import { 
   CameraSelection,
-  MicrophoneSelection,
+  MicSelection,
   SpeakerSelection,
   QualitySelection,
   BackgroundBlurCheckbox
@@ -68,13 +68,6 @@ export default function EnhancedDeviceSelection({
         <div style={labelStyle}>📹 Camera</div>
         <CameraSelection 
           label="Select Camera"
-          style={{
-            width: '100%',
-            padding: '8px 12px',
-            border: '1px solid #ccc',
-            borderRadius: '4px',
-            fontSize: '14px'
-          }}
         />
         <div style={descriptionStyle}>
           Choose your camera device. Grant camera permission to see available options.
@@ -84,15 +77,8 @@ export default function EnhancedDeviceSelection({
       {/* Microphone Selection */}
       <div style={sectionStyle}>
         <div style={labelStyle}>🎤 Microphone</div>
-        <MicrophoneSelection 
+        <MicSelection 
           label="Select Microphone"
-          style={{
-            width: '100%',
-            padding: '8px 12px',
-            border: '1px solid #ccc',
-            borderRadius: '4px',
-            fontSize: '14px'
-          }}
         />
         <div style={descriptionStyle}>
           Choose your microphone device. Test audio levels to ensure it's working properly.
@@ -104,13 +90,6 @@ export default function EnhancedDeviceSelection({
         <div style={labelStyle}>🔊 Speaker</div>
         <SpeakerSelection 
           label="Select Speaker"
-          style={{
-            width: '100%',
-            padding: '8px 12px',
-            border: '1px solid #ccc',
-            borderRadius: '4px',
-            fontSize: '14px'
-          }}
         />
         <div style={descriptionStyle}>
           Choose your audio output device. This controls where you'll hear other participants.
@@ -121,15 +100,7 @@ export default function EnhancedDeviceSelection({
       {showQualitySettings && (
         <div style={sectionStyle}>
           <div style={labelStyle}>📊 Video Quality</div>
-          <QualitySelection 
-            style={{
-              width: '100%',
-              padding: '8px 12px',
-              border: '1px solid #ccc',
-              borderRadius: '4px',
-              fontSize: '14px'
-            }}
-          />
+          <QualitySelection />
           <div style={descriptionStyle}>
             Adjust video quality based on your internet connection. Higher quality uses more bandwidth.
           </div>
@@ -141,11 +112,7 @@ export default function EnhancedDeviceSelection({
         <div style={sectionStyle}>
           <div style={labelStyle}>🌫️ Background Effects</div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <BackgroundBlurCheckbox 
-              style={{
-                transform: 'scale(1.2)'
-              }}
-            />
+            <BackgroundBlurCheckbox />
             <span style={{ fontSize: '14px' }}>Enable background blur</span>
           </div>
           <div style={descriptionStyle}>

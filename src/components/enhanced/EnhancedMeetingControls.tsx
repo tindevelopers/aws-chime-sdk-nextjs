@@ -42,7 +42,7 @@ export default function EnhancedMeetingControls({
 }: EnhancedMeetingControlsProps) {
   const { muted } = useToggleLocalMute();
   const { isVideoEnabled } = useLocalVideo();
-  const { isContentShareActive } = useContentShareState();
+  const { isLocalUserSharing } = useContentShareState();
   const meetingManager = useMeetingManager();
 
   const handleLeaveMeeting = () => {
@@ -80,7 +80,8 @@ export default function EnhancedMeetingControls({
       >
         {/* Core Audio/Video Controls */}
         <AudioInputControl 
-          label="Microphone"
+          muteLabel="Mute"
+          unmuteLabel="Unmute"
         />
         
         <VideoInputControl 
@@ -91,7 +92,8 @@ export default function EnhancedMeetingControls({
         {showAdvancedControls && (
           <>
             <AudioInputVFControl 
-              label="Voice Focus"
+              muteLabel="Mute"
+              unmuteLabel="Unmute"
             />
             
             <AudioOutputControl 
@@ -103,23 +105,23 @@ export default function EnhancedMeetingControls({
         {/* Video Effects */}
         {showAdvancedControls && (
           <VideoInputBackgroundBlurControl 
-            label="Background Blur"
+            backgroundBlurLabel="Background Blur"
           />
         )}
 
         {/* Content Sharing */}
         <ContentShareControl 
           label="Share Screen"
+          pauseLabel="Pause"
+          unpauseLabel="Resume"
         />
 
         {/* Roster Toggle */}
         {showRosterToggle && (
           <ControlBarButton
             icon={<div style={{ fontSize: '20px' }}>👥</div>}
-            onClick={onRosterToggle}
+            onClick={onRosterToggle || (() => {})}
             label="Participants"
-            data-tooltip="Show/hide participant roster"
-            data-tooltip-position="top"
           />
         )}
 
@@ -127,10 +129,8 @@ export default function EnhancedMeetingControls({
         {showChatToggle && (
           <ControlBarButton
             icon={<Chat />}
-            onClick={onChatToggle}
+            onClick={onChatToggle || (() => {})}
             label="Chat"
-            data-tooltip="Show/hide meeting chat"
-            data-tooltip-position="top"
           />
         )}
 
@@ -139,11 +139,6 @@ export default function EnhancedMeetingControls({
           icon={<Phone />}
           onClick={handleLeaveMeeting}
           label="Leave"
-          data-tooltip="Leave meeting"
-          data-tooltip-position="top"
-          style={{
-            backgroundColor: '#dc3545'
-          }}
         />
       </ControlBar>
 
@@ -176,7 +171,7 @@ export default function EnhancedMeetingControls({
             {isVideoEnabled ? '📹 Video On' : '📱 Video Off'}
           </div>
 
-          {isContentShareActive && (
+          {isLocalUserSharing && (
             <div style={{
               padding: '4px 8px',
               borderRadius: '12px',

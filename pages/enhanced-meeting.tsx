@@ -48,7 +48,8 @@ const EnhancedMeetingChat = dynamic(() => import('../src/components/enhanced/Enh
 
 export default function EnhancedMeetingPage() {
   const [isClient, setIsClient] = useState(false);
-  const [demoMode, setDemoMode] = useState<'full' | 'controls' | 'roster' | 'chat'>('full');
+  type DemoMode = 'full' | 'controls' | 'roster' | 'chat';
+  const [demoMode, setDemoMode] = useState<DemoMode>('full');
   const [currentUser, setCurrentUser] = useState({
     id: `user-${Date.now()}`,
     name: 'Demo User'
@@ -69,7 +70,7 @@ export default function EnhancedMeetingPage() {
   const containerStyle: React.CSSProperties = {
     width: '100vw',
     height: '100vh',
-    backgroundColor: demoMode === 'full' ? '#1a1a1a' : '#f8f9fa',
+    backgroundColor: (demoMode as string) === 'full' ? '#1a1a1a' : '#f8f9fa',
     overflow: 'hidden'
   };
 
@@ -96,7 +97,7 @@ export default function EnhancedMeetingPage() {
   return (
     <MeetingProvider>
       <div style={containerStyle}>
-        {demoMode === 'full' ? (
+        {(demoMode as string) === 'full' ? (
           // Full Meeting Experience
           <EnhancedMeetingExperience
             currentUserId={currentUser.id}
@@ -129,8 +130,8 @@ export default function EnhancedMeetingPage() {
                   onClick={() => setDemoMode('full')}
                   style={{
                     padding: '8px 16px',
-                    backgroundColor: demoMode === 'full' ? '#007bff' : '#e9ecef',
-                    color: demoMode === 'full' ? 'white' : '#495057',
+                    backgroundColor: (demoMode as string) === 'full' ? '#007bff' : '#e9ecef',
+                    color: (demoMode as string) === 'full' ? 'white' : '#495057',
                     border: 'none',
                     borderRadius: '4px',
                     cursor: 'pointer'

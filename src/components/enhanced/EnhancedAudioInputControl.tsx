@@ -118,39 +118,17 @@ export default function EnhancedAudioInputControl({
       }}>
         {/* Microphone Input Control with device selection */}
         <AudioInputControl 
-          label="Microphone"
+          muteLabel="Mute"
+          unmuteLabel="Unmute"
           mutedIconTitle="Unmute microphone"
           unmutedIconTitle="Mute microphone"
-          style={{
-            backgroundColor: muted ? '#dc3545' : '#28a745',
-            color: 'white',
-            border: 'none',
-            borderRadius: '6px',
-            padding: '8px 16px',
-            fontSize: '14px',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '5px'
-          }}
         />
 
         {/* Voice Focus (Noise Suppression) */}
         {showVoiceFocus && (
           <AudioInputVFControl 
-            label="Voice Focus"
-            style={{
-              backgroundColor: '#6f42c1',
-              color: 'white',
-              border: 'none',
-              borderRadius: '6px',
-              padding: '8px 16px',
-              fontSize: '14px',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '5px'
-            }}
+            muteLabel="Mute" 
+            unmuteLabel="Unmute"
           />
         )}
 
@@ -158,18 +136,6 @@ export default function EnhancedAudioInputControl({
         {showOutputControl && (
           <AudioOutputControl 
             label="Speaker"
-            style={{
-              backgroundColor: '#17a2b8',
-              color: 'white',
-              border: 'none',
-              borderRadius: '6px',
-              padding: '8px 16px',
-              fontSize: '14px',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '5px'
-            }}
           />
         )}
       </div>

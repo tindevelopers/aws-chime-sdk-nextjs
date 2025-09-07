@@ -194,14 +194,15 @@ export default function EnhancedMeetingExperience({
       <div style={mainContentStyle}>
         {/* Video Area */}
         <div style={videoAreaStyle}>
-          <VideoTileGrid
-            layout="featured"
-            noRemoteVideoView={<NoVideoView />}
-            style={{ 
-              width: '100%', 
-              height: '100%' 
-            }}
-          />
+          <div style={{ 
+            width: '100%', 
+            height: '100%' 
+          }}>
+            <VideoTileGrid 
+              layout="featured"
+              noRemoteVideoView={<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', backgroundColor: '#f0f0f0', color: '#666' }}>No remote video</div>}
+            />
+          </div>
 
           {/* Meeting Controls Overlay */}
           <div style={controlsStyle}>
